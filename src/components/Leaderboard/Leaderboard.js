@@ -1,6 +1,7 @@
 import React from "react";
 
 const Leaderboard = () => {
+  
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-md p-4 bg-dark border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">

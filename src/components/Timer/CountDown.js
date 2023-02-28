@@ -5,12 +5,9 @@ const CountDown = ({ timer }) => {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-  //  YYYY-MM-DDTHH:mm:ss.sssZ
-  const deadline = `${timer}T16:30:00.000Z`;
 
-  const getTime = () => {
-    const time = Date.parse(deadline) - Date.now();
-
+  const getTime = (timer) => {
+    const time = Date.parse(timer) - Date.now();
     setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
     setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
     setMinutes(Math.floor((time / 1000 / 60) % 60));
@@ -18,12 +15,11 @@ const CountDown = ({ timer }) => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => getTime(deadline), 1000);
-
+    const interval = setInterval(() => getTime(timer), 1000);
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="flex gap-2 text-white">
+    <div className="flex gap-2 text-white mt-6">
       <div>
         <span className="countdown font-mono">
           <span style={{ "--value": 15 }}>{days}</span>
