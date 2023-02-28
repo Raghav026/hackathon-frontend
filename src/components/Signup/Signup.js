@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { validation } from "../../validations/validation";
+import AuthApi from "../../Api/AuthApi";
 
 const Signup = () => {
   const [inputField, setInputField] = useState({
@@ -21,7 +22,7 @@ const Signup = () => {
     e.preventDefault();
     setErrors(validation(inputField));
     // const res = await AuthApi.post(`/register`, inputField);
-    const res = await axios.post("http://127.0.0.1:5000/register", inputField);
+    const res = await AuthApi.post("/register", inputField);
     const data = await res.data;
     console.log(data);
   };

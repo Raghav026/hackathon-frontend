@@ -1,14 +1,18 @@
-import axios from "axios";
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { validation } from "../../validations/validation";
+
+import { useNavigate } from "react-router-dom";
+import API from '../../Api/AuthApi'
 
 const Login = () => {
   const [inputField, setInputField] = useState({
     useremail: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
 
@@ -18,12 +22,16 @@ const Login = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     setErrors(validation(inputField));
-    
-    const res = await axios.post("http://127.0.0.1:5000/login", inputField);
+    const res = await API.post("/login", inputField);
     const data = await res.data;
-    console.log(data);
-    const cookie = document.cookie;
-    console.log(cookie);
+    const token = data.data
+    console.log(token+" token")
+    if(token) {
+      localStorage.setItem("token",token)
+      setTimeout(() => {
+        navigate("/home");
+      }, 2000);
+    }
   };
   return (
     <div className="bg-crick bg-contain">
@@ -38,7 +46,7 @@ const Login = () => {
             placeholder="Email"
             onChange={handleOnChange}
           />
-          {errors.useremail && <p className="bg-red-100">{errors.name}</p>}
+          {errors.useremail && <p className="bg-red-100">{errors.useremail}</p>}
           <input
             type="password"
             className="block border border-grey-light w-full p-3 rounded mb-4"
