@@ -1,10 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { AuthContext } from "../../context/Auth";
 
 import { validation } from "../../validations/validation";
 
 const Login = () => {
+  let { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const [inputField, setInputField] = useState({
     useremail: "",
     password: "",
@@ -18,12 +20,13 @@ const Login = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     setErrors(validation(inputField));
-    
+
     const res = await axios.post("http://127.0.0.1:5000/login", inputField);
     const data = await res.data;
     console.log(data);
-    const cookie = document.cookie;
-    console.log(cookie);
+    if (data.token) {
+      setIsAuthenticated({ isAuthenticated: data.token });
+    }
   };
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">
@@ -70,6 +73,7 @@ const Login = () => {
           </Link>
           .
         </div>
+        {isAuthenticated && <Navigate to="/" />}
       </div>
     </div>
   );

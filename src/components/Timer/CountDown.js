@@ -7,7 +7,7 @@ const CountDown = ({ timer }) => {
   const [seconds, setSeconds] = useState(0);
 
   const getTime = (timer) => {
-    const time = Date.parse(timer) - Date.now();
+    const time = timer - Date.now();
     setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
     setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
     setMinutes(Math.floor((time / 1000 / 60) % 60));

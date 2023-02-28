@@ -8,7 +8,7 @@ import {
 } from "../../Helper/dateHelper";
 import CountDown from "../Timer/CountDown";
 
-const Card = ({ timer = "2023-02-28" }) => {
+const Card = ({ timer }) => {
   const obj = useContext(MatchContext);
   console.log(obj);
   let match;
@@ -23,9 +23,7 @@ const Card = ({ timer = "2023-02-28" }) => {
   } else {
     match = <p>Is Ongoing</p>;
   }
-  // const alreadyDone = isPreviousDay(timer)
-  // const TodayAndDone = isTodayAndDone(timer)
-  // const
+
   return (
     <div className="flex justify-center align-center mt-20 h-90 w-90">
       <div className="w-full max-w-sm bg-dark border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
