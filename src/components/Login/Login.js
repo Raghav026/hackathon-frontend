@@ -21,7 +21,7 @@ const Login = () => {
     
     const res = await axios.post("http://127.0.0.1:5000/login", inputField);
     const data = await res.data;
-    console.log(res.headers);
+    console.log(data);
     const cookie = document.cookie;
     console.log(cookie);
   };

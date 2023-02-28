@@ -53,10 +53,18 @@ function Input({ matchInfo, setmatchInfo }) {
           Select a date
         </label>
         <div className="flex">
+
         <DatePicker type="date" selected={startDate} onChange={(date) => setStartDate(date)} 
             className=" mt-20 peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-black-900 dark:placeholder:text-neutral-100 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
             />
         <button onClick={dateInfo} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded h-10 mt-12">Select</button>
+          <input
+            onChange={(e) => handleDateUpdate(e)}
+            type="date"
+            value={selectedDate}
+            className=" mt-20 peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-black-900 dark:placeholder:text-neutral-100 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+            placeholder="Select a date"
+          />
         </div>
       </div>
       </div>
