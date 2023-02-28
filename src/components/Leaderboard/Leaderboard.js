@@ -1,37 +1,35 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import AuthApi from "../../Api/AuthApi";
+import './leaderboard.css'
 
 const Leaderboard = () => {
-  return (
-    <div className="flex justify-center">
-      <div className="w-full max-w-md p-4 bg-dark border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-        <div>
-          <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white flex justify-center">
-            Top Scorer
-          </h5>
-        </div>
-        <div className="flow-root">
-          <ul
-            role="list"
-            className="divide-y divide-gray-200 dark:divide-gray-700"
-          >
-            <li className="py-3 sm:py-4">
-              <div className="flex items-center space-x-4">
-                <div className="flex-shrink-0"></div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    Neil Sims
-                  </p>
-                </div>
-                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  300
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+  const [list,setList] = useState([])
+
+  useEffect(()=>{
+    AuthApi.get("/getscore").then((response)=>{
+      setList([...response.data.data])
+
+    }).catch((err)=>{
+      console.log(err)
+    })
+
+  },[])
+  const userList = list.map((data,idx)=> {
+   return <div key={idx} className="leaderboard-div">
+      <div>{data.name}</div>
+      <div>{data.score}</div>
     </div>
-  );
+  })
+  return <div className="leaderboard-container">
+    <div className="leaderboard-header">Leaderboard</div>
+    <div className="leaderboard-header-2">
+    <div>
+      Name
+    </div>
+    <div>Score</div>
+    </div>
+    {userList}
+  </div>
 };
 
 export default Leaderboard;

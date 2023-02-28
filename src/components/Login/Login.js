@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { validation } from "../../validations/validation";
 
+import API from '../../Api/AuthApi'
+
 const Login = () => {
   const [inputField, setInputField] = useState({
     useremail: "",
@@ -18,8 +20,7 @@ const Login = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     setErrors(validation(inputField));
-    
-    const res = await axios.post("http://127.0.0.1:5000/login", inputField);
+    const res = await API.post("/login", inputField);
     const data = await res.data;
     console.log(res.headers);
     const cookie = document.cookie;
