@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+
+
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import { Routes, Route } from "react-router-dom";
@@ -64,6 +66,15 @@ function App() {
   const [timer, SetTimer] = useState("");
   return (
     <div>
+      {/* <Leaderboard /> */}
+      <div className="bg-Cricket">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/register" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/score" element={<Leaderboard />} />
+      </Routes>
+
       <MatchContext.Provider value={matchInfo}>
         {/* <Leaderboard /> */}
         <Routes>
@@ -78,7 +89,8 @@ function App() {
       {/* <Input matchInfo={matchInfo} setmatchInfo={setmatchInfo} /> */}
 
       {/* {matchInfo.result === "upcoming" && matchInfo.isupcoming ? <Card team1={team1} team2={team2} team1id={team1id} team2id={team2id} matchid={matchid} matchdate={matchdate} /> ? matchInfo.result==="done" :<Card /> : <Card/> } */}
-    </div>
+      </div>
+      </div>
   );
 }
 
