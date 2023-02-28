@@ -22,12 +22,13 @@ const Login = () => {
     setErrors(validation(inputField));
     const res = await API.post("/login", inputField);
     const data = await res.data;
-    console.log(res.headers);
+    console.log(data);
     const cookie = document.cookie;
     console.log(cookie);
   };
   return (
-    <div className="bg-grey-lighter min-h-screen flex flex-col">
+    <div className="bg-crick bg-contain">
+    <div className="bg-grey-lighter min-h-screen flex flex-col bg-fever bg-no-repeat bg-contain ">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
           <h1 className="mb-8 text-3xl text-center">Log In</h1>
@@ -72,7 +73,8 @@ const Login = () => {
           .
         </div>
       </div>
-    </div>
+      </div>
+      </div>
   );
 };
 
