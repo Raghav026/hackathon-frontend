@@ -9,7 +9,7 @@ import { Routes, Route } from "react-router-dom";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
 
 import HomePage from "./components/Homepage/HomePage";
-import { GlobalContext, MatchContext } from "./context/Match";
+import { GlobalContext, MatchContext, PredictionContext } from "./context/Match";
 
 function App() {
   const [matchInfo, setMatchInfo] = useState({
@@ -27,6 +27,9 @@ function App() {
       isOngoing: false,
     },
   });
+  const [predictionInfo,setPredictionInfo] =useState({
+    
+  })
 
   // const getmatch = () => {
   //   setMatchInfo({
@@ -68,23 +71,20 @@ function App() {
     <div>
       {/* <Leaderboard /> */}
       <div className="bg-Cricket">
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/register" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/score" element={<Leaderboard />} />
-      </Routes>
+      
 
-      <MatchContext.Provider value={matchInfo}>
+      <MatchContext.Provider value={{matchInfo,setMatchInfo}}>
+        <PredictionContext.Provider value={{predictionInfo,setPredictionInfo}}>
         {/* <Leaderboard /> */}
         <Routes>
           <Route path="/register" element={<Signup />} />
           <Route path="/login" element={<Login />} />
 
-          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
 
           <Route path="/score" element={<Leaderboard />} />
         </Routes>
+        </PredictionContext.Provider>
       </MatchContext.Provider>
       {/* <Input matchInfo={matchInfo} setmatchInfo={setmatchInfo} /> */}
 

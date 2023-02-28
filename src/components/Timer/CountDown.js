@@ -7,17 +7,21 @@ const CountDown = ({ timer }) => {
   const [seconds, setSeconds] = useState(0);
 
   const getTime = (timer) => {
-    const time = Date.parse(timer) - Date.now();
+    timer.setHours(16,30)
+    console.log(timer)
+    const time = timer - Date.now();
     setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
     setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
     setMinutes(Math.floor((time / 1000 / 60) % 60));
     setSeconds(Math.floor((time / 1000) % 60));
   };
 
-  useEffect(() => {
+  
+  useEffect(()=>{
     const interval = setInterval(() => getTime(timer), 1000);
     return () => clearInterval(interval);
-  }, []);
+
+  },[timer])
   return (
     <div className="flex gap-2 text-white mt-6">
       <div>
