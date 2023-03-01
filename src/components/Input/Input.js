@@ -4,7 +4,7 @@ import './input.css'
 import AuthApi from "../../Api/AuthApi";
 import { MatchContext, PredictionContext } from "../../context/Match";
 
-function Input({ selectedDate,handleDateUpdate }) {
+function Input({ selectedDate,setSelectedDate,handleDateUpdate }) {
 
 
   const {setMatchInfo}=useContext(MatchContext)
@@ -33,7 +33,6 @@ function Input({ selectedDate,handleDateUpdate }) {
       }
     })
     .then((res1)=>{
-      
       let flag=false
       if(!res1.data.success) {
         flag=true

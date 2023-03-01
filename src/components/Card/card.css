@@ -3,3 +3,10 @@
     color: white;
     font-size: 2.5vmin;
 }
+img {
+    width:7vmin;
+    height:7vmin;
+    display: inline;
+    margin: 2vmin;
+
+}

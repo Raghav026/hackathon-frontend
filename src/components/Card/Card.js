@@ -10,6 +10,7 @@ import {
 } from "../../Helper/dateHelper";
 import CountDown from "../Timer/CountDown";
 import "./card.css";
+import imagemap from "../../Image map/ImageMap";
 
 const Card = () => {
   const { matchInfo } = useContext(MatchContext);
@@ -134,7 +135,7 @@ const Card = () => {
    
    }, [predictionInfo]);
 
-  
+  console.log(imagemap)
   return (
     <div className="flex justify-center align-center mt-20 h-90 w-90">
       <div className="w-full max-w-sm bg-dark border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -144,11 +145,13 @@ const Card = () => {
             Match Details
           </h5>
           <span className="text-xl text-gray-500 dark:text-gray-400 mb-2">
+            <img src={imagemap[obj.data.team1Name.toLowerCase()]} /> vs <img src={imagemap[obj.data.team2Name.toLowerCase()]}/>
+          </span>
+          <span className="text-xl text-gray-500 dark:text-gray-400 mb-2">
             {obj.data.team1Name} VS {obj.data.team2Name}
           </span>
           {prediction}
           {match}
-          <img ></img>
           {/* <CountDown timer={date} /> */}
         </div>
       </div>
