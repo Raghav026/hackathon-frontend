@@ -7,7 +7,6 @@ const HomePage = () => {
   const [selectedDate, setSelectedDate] = useState(date);
   const handleDateUpdate = (e) => {
     //console.log(e.target.value)
-    var currentDate = new Date(e.target.value);
     setSelectedDate((state) => e.target.value);
     console.log(e.target.value)
     

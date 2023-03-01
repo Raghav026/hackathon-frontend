@@ -148,6 +148,7 @@ const Card = () => {
           </span>
           {prediction}
           {match}
+          <img ></img>
           {/* <CountDown timer={date} /> */}
         </div>
       </div>

@@ -33,6 +33,14 @@ function Input({ selectedDate,handleDateUpdate }) {
       }
     })
     .then((res1)=>{
+      
+      let flag=false
+      if(!res1.data.success) {
+        flag=true
+        alert(res1.data.data)
+        return 
+      }
+      if(flag) return
       setMatchInfo((prevstate)=>({...prevstate,...res1.data}))
       const matchid =res1.data.data.matchid
       AuthApi.get("/getpredictionbymatch",{
@@ -42,7 +50,6 @@ function Input({ selectedDate,handleDateUpdate }) {
         params: {
           matchid:matchid
         }}).then((res2)=>{
-          console.log(res2)
           if(!res2.data.data) {
             setPredictionInfo({...predictionInfo,done:false,prediction:""})
             return
@@ -53,6 +60,8 @@ function Input({ selectedDate,handleDateUpdate }) {
       
       
       
+    }).catch(err=>{
+      console.log(err)
     })
   }
   
