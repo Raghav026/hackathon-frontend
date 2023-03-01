@@ -37,12 +37,7 @@ function App() {
   
   return (
     <div>
-<<<<<<< Updated upstream
-      {/* <Leaderboard /> */}
-      <div >
-=======
-      <div className="bg-Cricket">
->>>>>>> Stashed changes
+      <div>
         <MatchContext.Provider value={{ matchInfo, setMatchInfo }}>
           <PredictionContext.Provider
             value={{ predictionInfo, setPredictionInfo }}
