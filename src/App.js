@@ -1,35 +1,34 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
 
 
 
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
-
-import HomePage from "./components/Homepage/HomePage";
-import { GlobalContext, MatchContext, PredictionContext } from "./context/Match";
+import BPL from "./components/BPL/BPL"
+import HomePage from "./components/Homepage/HomePage"
+import {  MatchContext, PredictionContext } from "./context/Match";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [matchInfo, setMatchInfo] = useState({
     success: true,
     data: {
-      team1ID: "0d37134a-32b9-4a2a-9efb-873f38f927a1",
-      team2ID: "f48dcf2c-7784-4c7e-85ef-c20c0308cc2f",
-      team1Name: "LSG",
-      team2Name: "DD",
+      team1ID: "",
+      team2ID: "f",
+      team1Name: "-",
+      team2Name: "-",
       isdraw: false,
-      match_date: "2023-2-28",
-      matchid: "94fa3fc8-49ec-4412-95e4-4a030884cc3d",
-      matchresult: "Upcoming Match",
+      match_date: "",
+      matchid: "",
+      matchresult: "",
       isUpcoming: true,
       isOngoing: false,
     },
   });
-  const [predictionInfo,setPredictionInfo] =useState({
-    
-  })
+  const [predictionInfo,setPredictionInfo] =useState({done:false,prediction:""})
 
   // const getmatch = () => {
   //   setMatchInfo({
@@ -65,8 +64,6 @@ function App() {
 
   // ate } = matchInfo;
   // const [jwt, setJwt] = useState(storedJwt || null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [timer, SetTimer] = useState("");
   return (
     <div>
       {/* <Leaderboard /> */}
@@ -77,12 +74,20 @@ function App() {
         <PredictionContext.Provider value={{predictionInfo,setPredictionInfo}}>
         {/* <Leaderboard /> */}
         <Routes>
+          <Route path="/" element={<Navigate to="/login" />}></Route>
           <Route path="/register" element={<Signup />} />
           <Route path="/login" element={<Login />} />
 
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/bpl" element={<ProtectedRoute><BPL /></ProtectedRoute>}>
 
-          <Route path="/score" element={<Leaderboard />} />
+          <Route index path="home" element={<HomePage />} />
+
+
+          <Route path="score" element={<Leaderboard />} />
+          </Route>
+
+          <Route path="*" element={<div>Page not found</div>} />
+
         </Routes>
         </PredictionContext.Provider>
       </MatchContext.Provider>

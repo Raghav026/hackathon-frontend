@@ -29,7 +29,7 @@ const Login = () => {
     if(token) {
       localStorage.setItem("token",token)
       setTimeout(() => {
-        navigate("/home");
+        navigate("/bpl");
       }, 2000);
     }
   };
