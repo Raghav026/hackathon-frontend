@@ -71,7 +71,7 @@ function App() {
   return (
     <div>
       {/* <Leaderboard /> */}
-      <div className="bg-Cricket">
+      <div >
         <MatchContext.Provider value={{ matchInfo, setMatchInfo }}>
           <PredictionContext.Provider
             value={{ predictionInfo, setPredictionInfo }}
@@ -83,6 +83,7 @@ function App() {
                   limit={5}
                   autoClose={2500}
                   closeOnClick={true}
+                  theme={"dark"}
                 />
 
                 <Routes>
