@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useNavigation } from "react-router-dom";
 import axios from "axios";
 
 import { validation } from "../../validations/validation";
@@ -12,6 +12,7 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
+  const navigate = useNavigate()
 
   const [errors, setErrors] = useState({});
 
@@ -24,7 +25,13 @@ const Signup = () => {
     // const res = await AuthApi.post(`/register`, inputField);
     const res = await AuthApi.post("/register", inputField);
     const data = await res.data;
-    console.log(data);
+    if(data.success) {
+      setTimeout(()=>{
+        navigate("/login")
+      },1500)
+      
+
+    }
   };
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">
@@ -74,7 +81,7 @@ const Signup = () => {
           </button>
         </div>
 
-        <div className="text-grey-dark mt-6">
+        <div className="text-blue mt-6">
           Already have an account?
           <Link to="/login"> Log in</Link>.
         </div>

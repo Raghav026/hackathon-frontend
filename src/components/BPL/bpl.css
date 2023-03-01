@@ -1,0 +1,19 @@
+.navbar {
+    padding: .25vmin;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid black;
+    justify-content: flex-end;
+    
+    
+}
+.navdiv {
+    margin: 1.75vmin;
+    font-size: 1.75vmin;
+    color: blue;
+
+}
+.navbar .active {
+    
+    color:green
+}
