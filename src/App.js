@@ -80,7 +80,7 @@ function App() {
 
           <Route path="/bpl" element={<ProtectedRoute><BPL /></ProtectedRoute>}>
 
-          <Route index path="home" element={<HomePage />} />
+          <Route index element={<HomePage />} />
 
 
           <Route path="score" element={<Leaderboard />} />
