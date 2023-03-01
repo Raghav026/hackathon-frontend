@@ -7,5 +7,6 @@
     align-items: center;
     min-height: 100vh;
     min-width: 100%;
-    background-color: rgba(18, 18, 18, 0.59);
+    background-color: rgba(18, 18, 18, 1);
+    z-index: 99;
   }

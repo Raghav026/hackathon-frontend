@@ -21,15 +21,21 @@ const Leaderboard = () => {
     </div>
   })
   return <div className="leaderboard-container">
-    <div className="leaderboard-header">Leaderboard</div>
+    <div className="leaderboard-header">
+      <span>
+    <img src="https://static.vecteezy.com/system/resources/previews/011/048/328/original/sports-championship-gold-trophy-icon-png.png" /></span>
+      <span>Most Active Players</span></div>
     <div className="leaderboard-header-2">
-    <div>
-      Name
+      <div>Name
+      </div>
+      <div>Score</div>
     </div>
-    <div>Score</div>
+    <div className="userlist">
+      
+      {userList} 
+
     </div>
-    {userList}
-  </div>
+    </div>
 };
 
 export default Leaderboard;
