@@ -4,7 +4,8 @@ import axios from "axios";
 
 import { validation } from "../../validations/validation";
 import AuthApi from "../../Api/AuthApi";
-
+import { useContext } from "react";
+import { LoadingContext, ErrorContext } from "../../context/AppState";
 const Signup = () => {
   const [inputField, setInputField] = useState({
     name: "",
@@ -12,8 +13,10 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
+  const { setIsLoading } = useContext(LoadingContext);
+  const { error, setError } = useContext(ErrorContext);
   const [errors, setErrors] = useState({});
 
   const handleOnChange = (e) => {
@@ -22,16 +25,16 @@ const Signup = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     setErrors(validation(inputField));
-    // const res = await AuthApi.post(`/register`, inputField);
-    const res = await AuthApi.post("/register", inputField);
-    const data = await res.data;
-    if(data.success) {
-      setTimeout(()=>{
-        navigate("/login")
-      },1500)
-      
-
-    }
+    setIsLoading(true);
+    AuthApi.post("/register", inputField).then((res) => {
+      const data = res.data;
+        setIsLoading(false);
+      if (data.success) {
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500);
+      }
+    });
   };
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">

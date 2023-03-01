@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-
-
-
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
-import BPL from "./components/BPL/BPL"
-import HomePage from "./components/Homepage/HomePage"
-import {  MatchContext, PredictionContext } from "./context/Match";
+import BPL from "./components/BPL/BPL";
+import HomePage from "./components/Homepage/HomePage";
+import { MatchContext, PredictionContext } from "./context/Match";
+import { LoadingContext, ErrorContext } from "./context/AppState";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import Spinner from "./components/Spinner/Spinner";
 function App() {
   const [matchInfo, setMatchInfo] = useState({
     success: true,
@@ -28,7 +27,12 @@ function App() {
       isOngoing: false,
     },
   });
-  const [predictionInfo,setPredictionInfo] =useState({done:false,prediction:""})
+  const [predictionInfo, setPredictionInfo] = useState({
+    done: false,
+    prediction: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({});
 
   // const getmatch = () => {
   //   setMatchInfo({
@@ -68,34 +72,48 @@ function App() {
     <div>
       {/* <Leaderboard /> */}
       <div className="bg-Cricket">
-      
+        <MatchContext.Provider value={{ matchInfo, setMatchInfo }}>
+          <PredictionContext.Provider
+            value={{ predictionInfo, setPredictionInfo }}
+          >
+            <LoadingContext.Provider value={{ setIsLoading, isLoading }}>
+              <ErrorContext.Provider value={{ setError, error }}>
+                <Spinner />
+                <ToastContainer
+                  limit={5}
+                  autoClose={2500}
+                  closeOnClick={true}
+                />
 
-      <MatchContext.Provider value={{matchInfo,setMatchInfo}}>
-        <PredictionContext.Provider value={{predictionInfo,setPredictionInfo}}>
-        {/* <Leaderboard /> */}
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" />}></Route>
-          <Route path="/register" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
+                <Routes>
+                  <Route path="/" element={<Navigate to="/login" />}></Route>
+                  <Route path="/register" element={<Signup />} />
+                  <Route path="/login" element={<Login />} />
 
-          <Route path="/bpl" element={<ProtectedRoute><BPL /></ProtectedRoute>}>
+                  <Route
+                    path="/bpl"
+                    element={
+                      <ProtectedRoute>
+                        <BPL />
+                      </ProtectedRoute>
+                    }
+                  >
+                    <Route index element={<HomePage />} />
 
-          <Route index element={<HomePage />} />
+                    <Route path="score" element={<Leaderboard />} />
+                  </Route>
 
+                  <Route path="*" element={<div>Page not found</div>} />
+                </Routes>
+              </ErrorContext.Provider>
+            </LoadingContext.Provider>
+          </PredictionContext.Provider>
+        </MatchContext.Provider>
+        {/* <Input matchInfo={matchInfo} setmatchInfo={setmatchInfo} /> */}
 
-          <Route path="score" element={<Leaderboard />} />
-          </Route>
-
-          <Route path="*" element={<div>Page not found</div>} />
-
-        </Routes>
-        </PredictionContext.Provider>
-      </MatchContext.Provider>
-      {/* <Input matchInfo={matchInfo} setmatchInfo={setmatchInfo} /> */}
-
-      {/* {matchInfo.result === "upcoming" && matchInfo.isupcoming ? <Card team1={team1} team2={team2} team1id={team1id} team2id={team2id} matchid={matchid} matchdate={matchdate} /> ? matchInfo.result==="done" :<Card /> : <Card/> } */}
+        {/* {matchInfo.result === "upcoming" && matchInfo.isupcoming ? <Card team1={team1} team2={team2} team1id={team1id} team2id={team2id} matchid={matchid} matchdate={matchdate} /> ? matchInfo.result==="done" :<Card /> : <Card/> } */}
       </div>
-      </div>
+    </div>
   );
 }
 
