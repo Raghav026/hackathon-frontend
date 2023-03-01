@@ -1,20 +1,32 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import ParticlesBg from "particles-bg";
+
 
 import API from "../../Api/AuthApi";
-import { ErrorContext, LoadingContext } from "../../context/AppState";
+import {  LoadingContext } from "../../context/AppState";
 const Login = () => {
+
+  
   const [inputField, setInputField] = useState({
     useremail: "",
     password: "",
   });
-  const navigate = useNavigate();
   const { setIsLoading } = useContext(LoadingContext);
-  const { error, setError } = useContext(ErrorContext);
+  
+  
+  const navigate = useNavigate();
+  useEffect(()=>{
+    const token=localStorage.getItem("token")
+    if(token) {
+      navigate("/bpl/home")
+      return
+    }
 
+  },[])
+  
+  
   const handleOnChange = (e) => {
     setInputField({ ...inputField, [e.target.name]: e.target.value });
   };
@@ -32,7 +44,7 @@ const Login = () => {
           localStorage.setItem("token", token);
           setTimeout(() => {
             setIsLoading(false);
-            navigate("/bpl");
+            navigate("/bpl/home");
           }, 2000);
         }
       })
@@ -45,10 +57,9 @@ const Login = () => {
 
   return (
     <>
-      <ParticlesBg type="lines" color={"white"} bg={true} />
       <div className="min-h-screen flex flex-col" >
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-          <div className="px-6 py-8 rounded shadow-md text-black w-full" style={{backgroundColor:'#20242f' ,color: '#dedede'}}>
+          <div className="px-8 py-14 rounded shadow-md text-black w-full" style={{backgroundColor:'#20242f' ,color: '#dedede'}}>
             <h1 className="mb-8 text-3xl text-center">Log In</h1>
             <input
               type="text"
@@ -73,7 +84,7 @@ const Login = () => {
               Login
             </button>
 
-            <div className="text-grey-dark mt-6 text-center " style={{fontSize:'2vmin'}}>
+            <div className="text-grey-dark mt-6 text-center " style={{fontSize:'1.65vmin'}}>
               Don't have an account?
               <Link
                 to="/register"

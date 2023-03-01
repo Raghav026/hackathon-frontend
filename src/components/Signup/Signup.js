@@ -15,15 +15,12 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const { setIsLoading } = useContext(LoadingContext);
-  const { error, setError } = useContext(ErrorContext);
-  const [errors, setErrors] = useState({});
 
   const handleOnChange = (e) => {
     setInputField({ ...inputField, [e.target.name]: e.target.value });
   };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    setErrors(inputField);
     setIsLoading(true);
     AuthApi.post("/register", inputField)
       .then((res) => {
@@ -45,7 +42,6 @@ const Signup = () => {
   };
   return (
     <>
-      <ParticlesBg type="lines" color="white" bg={true} />
       <div className="bg-grey-lighter min-h-screen flex flex-col">
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full" style={{backgroundColor:'#20242f' ,color: '#dedede'}}>

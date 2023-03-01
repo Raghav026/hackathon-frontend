@@ -3,12 +3,11 @@ import "./input.css";
 
 import AuthApi from "../../Api/AuthApi";
 import { MatchContext, PredictionContext } from "../../context/Match";
-import { ErrorContext, LoadingContext } from "../../context/AppState";
+import { LoadingContext } from "../../context/AppState";
 import { toast } from "react-toastify";
 
 function Input({ selectedDate, setSelectedDate, handleDateUpdate }) {
   const { setIsLoading } = useContext(LoadingContext);
-  const { error, setError } = useContext(ErrorContext);
   const { setMatchInfo } = useContext(MatchContext);
   const { predictionInfo, setPredictionInfo } = useContext(PredictionContext);
 

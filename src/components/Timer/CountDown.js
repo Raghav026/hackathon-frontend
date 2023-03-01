@@ -1,55 +1,51 @@
 import React, { useState, useEffect } from "react";
-
 const CountDown = ({ timer }) => {
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-
   const getTime = (timer) => {
-    timer.setHours(16,30)
-    console.log(timer)
+    timer.setHours(16, 30);
+    console.log(timer);
     const time = timer - Date.now();
     setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
     setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
     setMinutes(Math.floor((time / 1000 / 60) % 60));
     setSeconds(Math.floor((time / 1000) % 60));
   };
-
-  
-  useEffect(()=>{
+  useEffect(() => {
     const interval = setInterval(() => getTime(timer), 1000);
     return () => clearInterval(interval);
-
-  },[timer])
+  }, [timer]);
   return (
-    <div className="flex gap-2 text-white mt-6">
-      <div>
-        <span className="countdown font-mono">
-          <span style={{ "--value": 15 }}>{days}</span>
-        </span>
-        days
+    <>
+      <div className="grid grid-flow-col gap-5 text-center auto-cols-max">
+        <div className="flex flex-col p-2 bg-neutral text-white">
+          <span className="font-mono text-5xl">
+            <span style={{}}>{days}</span>
+          </span>
+          <span className="duration">Days</span>
+        </div>
+        <div className="flex flex-col p-2 bg-neutral text-white">
+          <span className="font-mono text-5xl">
+            <span style={{}}>{hours}</span>
+          </span>
+          <span>Hours</span>
+        </div>
+        <div className="flex flex-col p-2 bg-neutral text-white">
+          <span className="font-mono text-5xl">
+            <span style={{}}>{minutes}</span>
+          </span>
+          <span>Minutes</span>
+        </div>
+        <div className="flex flex-col p-2 bg-neutral text-white">
+          <span className="font-mono text-5xl">
+            <span style={{}}>{seconds}</span>
+          </span>
+          <span>Seconds</span>
+        </div>
       </div>
-      <div>
-        <span className="countdown font-mono">
-          <span style={{ "--value": 10 }}>{hours}</span>
-        </span>
-        hours
-      </div>
-      <div>
-        <span className="countdown font-mono">
-          <span style={{ "--value": 24 }}>{minutes}</span>
-        </span>
-        min
-      </div>
-      <div>
-        <span className="countdown font-mono">
-          <span style={{ "--value": 50 }}>{seconds}</span>
-        </span>
-        sec
-      </div>
-    </div>
+    </>
   );
 };
-
-export default CountDown;
+export default CountDown

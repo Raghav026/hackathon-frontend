@@ -1,12 +1,80 @@
 .matchresult {
-    margin: 3vmin;
-    color: white;
+    margin: 2vmin;
+    color: #bdbdbd;
     font-size: 2.5vmin;
 }
-img {
-    width:7vmin;
-    height:7vmin;
-    display: inline;
+.userprediction {
     margin: 2vmin;
+    color: #bdbdbd;
+    font-size: 2.25vmin;
+
+}
+
+.card-holder {
+    color: #bdbdbd;
+    justify-content: center;
+    align-self:center;
+    display: flex;;
+}
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+.card-body > h5 {
+    font-size: 3.5vmin;
+    color:rgb(139, 128, 195);
+    margin: 3vmin;
+    
+}
+.card-images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-bottom: 6vmin;
+  
+}
+.card-images > * {
+    width: 16vmin;
+    height: 18vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vmin;
+
+}
+.prediction-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.prediction-section > div:first-child {
+    font-size: 2.75vmin;
+    margin: 5vmin;
+
+
+}
+.prediction-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:60vmin;
+    
+
+}
+.prediction-buttons > button{
+    background-color:rgb(136, 123, 200);
+    padding: 2vmin;
+    border: 0;
+    width: 10vmin;
+    border-radius: .2vmin;
+    font-size: 2vmin;
+    color:white;
+
+
 
 }

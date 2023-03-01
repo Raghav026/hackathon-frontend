@@ -7,12 +7,12 @@ const HomePage = () => {
   var date = new Date();
   const [selectedDate, setSelectedDate] = useState(date);
   const handleDateUpdate = (e) => {
-    //console.log(e.target.value)
+  
     setSelectedDate((state) => e.target.value);
     console.log(e.target.value);
   };
   return (
-    <>
+    <> 
       <div>
         <Input
           selectedDate={selectedDate}
@@ -21,7 +21,6 @@ const HomePage = () => {
         />
         <Card />
       </div>
-      <ParticlesBg type="cobweb" bg={true} />
     </>
   );
 };

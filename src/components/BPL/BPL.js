@@ -5,7 +5,7 @@ function BPL() {
   return (
     <>
       <div className="navbar">
-        <NavLink className={"navdiv"} to={""}>
+        <NavLink className={"navdiv"} to={"home"}>
           <div>Home</div>
         </NavLink>
         <NavLink className={"navdiv"} to={"score"}>
