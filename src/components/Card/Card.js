@@ -22,7 +22,7 @@ const Card = () => {
   const obj = matchInfo;
   const [match, setMatch] = useState(<></>);
   const [prediction, setPrediction] = useState(<></>);
-  function createPrediction(teamid) {
+  const createPrediction=(teamid)=> {
     const token = localStorage.getItem("token");
     AuthApi.post(
       "/createprediction",
@@ -38,10 +38,12 @@ const Card = () => {
       }
     ).then((response) => {
       const winnerID = teamid;
-      toast.success("Prediction Done")
+      toast.success("Prediction Done");
       setPredictionInfo({ done: true, prediction: winnerID });
     });
   }
+
+  
 
   const date = new Date(timer);
   useEffect(() => {
@@ -59,7 +61,9 @@ const Card = () => {
         <div className="prediction-section">
           <div>Choose Your Team Now!</div>
           <div className="prediction-buttons">
-            <button onClick={() => createPrediction(matchInfo.data.team1ID)}>
+            <button
+              onClick={() => createPrediction(matchInfo.data.team1ID)}
+            >
               {obj.data.team1Name}
             </button>
             <button onClick={() => createPrediction(matchInfo.data.team2ID)}>
@@ -85,11 +89,11 @@ const Card = () => {
   useEffect(() => {
     console.log(predictionInfo);
 
-      if (!predictionInfo.done) {
-        if (isTodayAndDone(date) || isPreviousDay(date)) {
-          setPrediction(<p className="userprediction">Prediction Time Over!</p>);
-          return
-        }
+    if (!predictionInfo.done) {
+      if (isTodayAndDone(date) || isPreviousDay(date)) {
+        setPrediction(<p className="userprediction">Prediction Time Over!</p>);
+        return;
+      }
       setPrediction(
         <div className="prediction-section">
           <div>Choose Your Team Now!</div>
@@ -122,7 +126,7 @@ const Card = () => {
     <div className="card-holder">
       <div className="card-body">
         <h5>Match Details</h5>
-        
+
         <div className="card-images">
           <img src={imagemap[obj.data.team1Name.toLowerCase()]} />
           <p>VS</p>

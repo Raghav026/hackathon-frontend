@@ -74,6 +74,14 @@
     border-radius: .2vmin;
     font-size: 2vmin;
     color:white;
+    transition: all .125s linear;
+
+
+
+}
+.prediction-buttons > button:hover{
+    opacity: .8;
+    cursor: pointer;
 
 
 
