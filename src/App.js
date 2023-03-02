@@ -48,7 +48,7 @@ function App() {
                 closeOnClick={true}
                 theme={"dark"}
               />
-              <ParticlesBg type="lines" color={"white"} bg={true} />
+              <ParticlesBg type="lines" color={"white"}  bg={true} />
 
               <Routes>
                 <Route path="/" element={<Navigate to="/login" />}></Route>
@@ -68,7 +68,7 @@ function App() {
                   <Route path="score" element={<Leaderboard />} />
                 </Route>
 
-                <Route path="*" element={<div>Page not found</div>} />
+                <Route path="*" element={<Navigate to="/login" />} />
               </Routes>
             </LoadingContext.Provider>
           </PredictionContext.Provider>

@@ -19,6 +19,7 @@ const CountDown = ({ timer }) => {
   }, [timer]);
   return (
     <>
+    <h2 className="text-center text-white text-3xl mb-4">Match Starts In:</h2>
       <div className="grid grid-flow-col gap-5 text-center auto-cols-max">
         <div className="flex flex-col p-2 bg-neutral text-white">
           <span className="font-mono text-5xl">

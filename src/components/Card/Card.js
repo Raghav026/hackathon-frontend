@@ -85,9 +85,11 @@ const Card = () => {
   useEffect(() => {
     console.log(predictionInfo);
 
-    if (isTodayAndDone(date) || isPreviousDay(date)) {
-      setPrediction(<p className="userprediction"></p>);
-    } else if (!predictionInfo.done) {
+      if (!predictionInfo.done) {
+        if (isTodayAndDone(date) || isPreviousDay(date)) {
+          setPrediction(<p className="userprediction">Prediction Time Over!</p>);
+          return
+        }
       setPrediction(
         <div className="prediction-section">
           <div>Choose Your Team Now!</div>
